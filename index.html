@@ -221,6 +221,33 @@
   @media(max-width:900px){.tile.wide{grid-column:auto}}
   .stat{font-size:clamp(64px,8vw,110px);font-weight:800;letter-spacing:-.05em;line-height:1}
 
+  /* ownership */
+  .own{display:grid;grid-template-columns:1fr 1.25fr;gap:20px;margin-top:60px;align-items:start}
+  @media(max-width:900px){.own{grid-template-columns:1fr}}
+  .side{border-radius:26px;padding:34px;border:1px solid var(--line);background:var(--card)}
+  .side.us{background:linear-gradient(180deg,rgba(124,92,255,.12),rgba(255,255,255,.02) 55%)}
+  .side.you{background:linear-gradient(180deg,rgba(255,122,61,.12),rgba(255,255,255,.02) 55%);border-color:rgba(255,122,61,.3)}
+  .side .who{font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .side h4{font-size:28px;letter-spacing:-.02em;margin:8px 0 18px}
+  .prov{list-style:none}
+  .prov li{display:flex;gap:14px;padding:14px 0;border-top:1px solid var(--line)}
+  .prov li i{font-style:normal;font-size:22px;flex:none}
+  .prov b,.own-item b{display:block;font-size:16px}
+  .prov span,.own-item span{font-size:14px;color:var(--muted)}
+  .meter .lbl{display:flex;justify-content:space-between;gap:12px;font-size:14px;color:var(--muted);margin-bottom:8px}
+  .meter .lbl b{color:#fff;font-weight:600}
+  .meter .track{height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+  .meter .fill{height:100%;width:0;background:var(--grad);transition:width .6s cubic-bezier(.2,.7,.1,1)}
+  .meter .hint{font-size:12.5px;color:var(--muted);margin:10px 0 16px}
+  .own-item{display:flex;gap:14px;align-items:flex-start;width:100%;text-align:left;padding:14px;margin-bottom:10px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.02);color:inherit;font:inherit;cursor:pointer;transition:border-color .3s,background .3s}
+  .own-item:hover{border-color:rgba(255,255,255,.25)}
+  .own-item .box{width:22px;height:22px;flex:none;margin-top:2px;border-radius:7px;border:2px solid #3a3a3c;display:grid;place-items:center;font-size:13px;font-weight:800;color:transparent;transition:all .25s}
+  .own-item.on{border-color:rgba(255,122,61,.5);background:rgba(255,122,61,.08)}
+  .own-item.on .box{background:var(--a1);border-color:var(--a1);color:#000}
+  .own-item code{font-size:12px;color:#ffb38a;background:rgba(255,255,255,.06);padding:1px 5px;border-radius:5px}
+  .always{margin-top:6px;padding:14px 16px;border-radius:14px;border:1px dashed rgba(255,255,255,.22);font-size:14.5px;color:#d2d2d7}
+  .always b{color:#fff}
+
   /* orbit */
   .orbit-wrap{position:relative;height:660px;margin-top:20px}
   .core{position:absolute;left:50%;top:50%;margin:-75px 0 0 -75px;z-index:3;width:150px;height:150px;border-radius:40px;background:var(--grad);display:grid;place-items:center;font-weight:800;font-size:24px;letter-spacing:-.02em;box-shadow:0 0 80px rgba(255,61,127,.55),inset 0 0 30px rgba(255,255,255,.25)}
@@ -298,6 +325,7 @@
       <li><a href="#channels">Channels</a></li>
       <li><a href="#pipeline">Pipeline</a></li>
       <li><a href="#trust">Trust</a></li>
+      <li><a href="#ownership">Ownership</a></li>
       <li><a href="#connected">Integrations</a></li>
       <li><a href="#ideas">AI SDLC</a></li>
       <li><a href="#roadmap">Roadmap</a></li>
@@ -436,10 +464,48 @@
     <h2 class="big reveal d1">Autonomous.<br><span class="grad">Always accountable.</span></h2>
     <div class="grid3">
       <div class="tile reveal wide"><div class="stat grad">0</div><h4 style="margin-top:14px">merges without a human</h4><p>Forge opens pull requests. Your engineers review and merge them, every time.</p></div>
-      <div class="tile reveal d1"><div class="ic">🧪</div><h4>Your gates decide</h4><p>Lint, tests and builds from each repo's verification pack run in an isolated stack. If a gate fails, no PR is opened.</p></div>
+      <div class="tile reveal d1"><div class="ic">🧪</div><h4>Your gates decide</h4><p>Lint, tests and builds from the verification pack each team owns run in an isolated stack. If a gate fails, no PR is opened.</p></div>
       <div class="tile reveal"><div class="ic">📦</div><h4>Sandboxed by default</h4><p>Each run happens in a throwaway Docker container as a non-root user with dropped capabilities and its own workspace.</p></div>
       <div class="tile reveal d1"><div class="ic">🙅</div><h4>An honest "no"</h4><p>The Qualifier rejects vague or risky tickets and explains why, instead of guessing.</p></div>
       <div class="tile reveal d2"><div class="ic">🔍</div><h4>Fully visible</h4><p>Every stage shows up as Jira labels, comments and Slack thread updates.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- OWNERSHIP -->
+<section id="ownership" class="pad" style="padding-top:40px">
+  <div class="wrap">
+    <div class="eyebrow reveal">Shared responsibility</div>
+    <h2 class="big reveal d1">We build the forge.<br><span class="grad">You own the craft.</span></h2>
+    <p class="lead reveal d2">DT Forge is a tool, not a new owner. Each team stays responsible for its code and decides how far Forge can go by investing in its harness, instructions and tests.</p>
+    <div class="own">
+      <div class="side us reveal">
+        <div class="who">DT Forge team provides</div>
+        <h4>The platform</h4>
+        <ul class="prov">
+          <li><i>⚙️</i><div><b>Agent runtime</b><span>Sandboxed containers, Claude Code, global rules and output schemas.</span></div></li>
+          <li><i>🔀</i><div><b>Pipeline</b><span>Intake, qualify, plan, implement, verify, review and open the PR.</span></div></li>
+          <li><i>🔌</i><div><b>Integrations</b><span>Jira, Slack, GitHub, GitLab, and next Sentry, Grafana and Amplitude.</span></div></li>
+          <li><i>📊</i><div><b>Visibility</b><span>Labels, comments, Slack updates and delivery metrics.</span></div></li>
+          <li><i>🧭</i><div><b>Onboarding</b><span>Verification pack templates, docs and help to get a repo ready.</span></div></li>
+        </ul>
+      </div>
+      <div class="side you reveal d1">
+        <div class="who">Code owners own</div>
+        <h4>The quality bar</h4>
+        <div class="meter">
+          <div class="lbl"><span>Forge in your repo · <b id="ownLvl"></b></span></div>
+          <div class="track"><div class="fill" id="ownFill"></div></div>
+          <div class="lbl" style="margin:10px 0 0"><b id="ownTxt"></b></div>
+          <div class="hint">Tick what your repo already has.</div>
+        </div>
+        <button class="own-item on"><div class="box">✓</div><div><b>🧰 Harness</b><span>Verification pack: <code>project.yml</code>, bootstrap, gates and the compose stack Forge runs in.</span></div></button>
+        <button class="own-item on"><div class="box">✓</div><div><b>🧪 Tests</b><span>Gates are only as strong as your tests. Weak coverage means a weak safety net.</span></div></button>
+        <button class="own-item"><div class="box">✓</div><div><b>📝 Instructions</b><span><code>AGENTS.md</code> and <code>.dt-forge/*.md</code>: conventions, boundaries and what to avoid.</span></div></button>
+        <button class="own-item"><div class="box">✓</div><div><b>🧠 Skills</b><span><code>.claude/skills</code> for repeatable workflows your team already trusts.</span></div></button>
+        <button class="own-item"><div class="box">✓</div><div><b>🎫 Ready tickets</b><span>Clear acceptance criteria, and the board columns and labels Forge may pick up.</span></div></button>
+        <div class="always">👀 <b>Always:</b> code owners review, merge and stay accountable for what ships.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -502,7 +568,7 @@
   <div class="wrap" style="position:relative">
     <h2 class="reveal">Hand it<br><span class="grad">a ticket.</span></h2>
     <div class="cmd reveal d1"><code>@forge fix PAY-1423</code><code>label: dt-forge</code></div>
-    <p class="lead reveal d2" style="margin:0 auto">Start with one board and a handful of small tickets. Measure lead time and review rework, then scale what works.</p>
+    <p class="lead reveal d2" style="margin:0 auto">Start with one board whose owners have a harness, instructions and tests in place, and a handful of small tickets. Measure lead time and review rework, then scale what works.</p>
   </div>
 </section>
 
@@ -805,6 +871,26 @@ const ideas = [
 
 /* hide nav on scroll down */
 (() => { let last = 0; addEventListener('scroll', () => { const y = scrollY; $('#nav').style.transform = y > last && y > 200 ? 'translateY(-100%)' : ''; last = y; }, { passive: true }); })();
+
+/* ownership meter */
+(() => {
+  const items = $$('.own-item'), levels = [
+    'Nothing to verify against, so Forge rejects tickets',
+    'Typo-level fixes only',
+    'Small, well-scoped bug fixes',
+    'Bugs and chores with confidence',
+    'Small features that follow your conventions',
+    'Features that read like your team wrote them',
+  ];
+  const upd = () => {
+    const n = items.filter(i => i.classList.contains('on')).length;
+    $('#ownFill').style.width = n / items.length * 100 + '%';
+    $('#ownLvl').textContent = `${n} of ${items.length}`;
+    $('#ownTxt').textContent = levels[n];
+  };
+  items.forEach(i => i.addEventListener('click', () => { i.classList.toggle('on'); upd(); }));
+  upd();
+})();
 </script>
 </body>
 </html>
